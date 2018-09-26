@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+   <bean id="connectionFactory" class="org.apache.activemq.spring.ActiveMQConnectionFactory">
+        <property name="userName" value="EYENW64350"/>
+        <property name="password" value="111111"/>
+        <property name="brokerURL" value="tcp://218.25.131.75:10002"/>
+   </bean>
+
+    <bean id="consumerMessageListener" class="com.sunshine.consumer.MessageListener"/>
+
+    <bean id="jmsContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="connectionFactory" />
+        <property name="destinationName" value="EYENW64350"/>
+        <property name="messageListener" ref="consumerMessageListener" />
+        <property name="sessionAcknowledgeMode" value="2"/>
+    </bean>
+
+
+</beans>
